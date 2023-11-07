@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'post-cloud';
+  title = 'Hello World Angular, a mudança';
+  title2:Number = 0;
 }
