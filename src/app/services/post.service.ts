@@ -14,7 +14,7 @@ export class PostService {
     return this.httpClient.get<Post[]>("http://localhost:8080/post");
   }
 
-  public getPostById(id: Number): Observable<Post> {
+  public getPostById(id: any): Observable<Post> {
     return this.httpClient.get<Post>("http://localhost:8080/post/" + id);
   }
 
