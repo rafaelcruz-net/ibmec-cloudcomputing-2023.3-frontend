@@ -13,7 +13,11 @@
 </mat-card>
 <br />
 <h1>Comentários da Postagem</h1>
-<mat-card *ngFor="let item of comment">
+<button mat-flat-button color="primary" (click)="mostrarCriarComentario()">Novo Comentário</button>
+<div *ngIf="showCriarComentario == true">
+  <app-create-comment [idPost]="post?.id" (newCommentEvent)="atualizarComentarios()"></app-create-comment>
+</div>
+<mat-card *ngFor="let item of comment" style="margin-top: 30px;">
   <mat-card-header>
     <mat-card-title>{{item.author}}</mat-card-title>
     <mat-card-subtitle>{{item.dtComment| date: "dd/MM/yyyy"}}</mat-card-subtitle>

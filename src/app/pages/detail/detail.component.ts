@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Post } from 'src/app/model/post.model';
 import { CommentService } from 'src/app/services/comment.service';
 import { PostService } from 'src/app/services/post.service';
-import { Comment } from 'src/app/model/comment.model';
+import { CommentModel } from 'src/app/model/comment.model';
 
 @Component({
   selector: 'app-detail',
@@ -13,25 +13,37 @@ import { Comment } from 'src/app/model/comment.model';
 export class DetailComponent implements OnInit {
 
   post?: Post;
-  comment?: Comment[];
+  comment?: CommentModel[];
+  showCriarComentario = false;
 
   constructor(private postService: PostService,
     private commentService: CommentService,
     private route: ActivatedRoute) {
 
   }
-
   ngOnInit(): void {
-    let idPost = this.route.snapshot.params["idPost"];
 
+    let idPost = this.route.snapshot.params["idPost"];
     this.postService.getPostById(idPost).subscribe(response => {
       this.post = response;
     });
 
+    this.carregaComentario();
+  }
+
+  private carregaComentario() {
+    let idPost = this.route.snapshot.params["idPost"];
     this.commentService.getComment(idPost).subscribe(response => {
       this.comment = response;
-      console.log(this.comment);
     });
+  }
+
+  public mostrarCriarComentario() {
+    this.showCriarComentario = true;
+  }
+
+  public atualizarComentarios() {
+    this.carregaComentario();
   }
 
 }
